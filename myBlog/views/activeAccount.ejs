@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Active Account</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/activeAccount.css">
+</head>
+
+<body>
+  <div id="container">
+    <% if(active) { %>
+    <div id="success-box">
+      <div class="dot"></div>
+      <div class="dot two"></div>
+      <div class="face">
+        <div class="eye"></div>
+        <div class="eye right"></div>
+        <div class="mouth happy"></div>
+      </div>
+      <div class="shadow scale"></div>
+      <div class="message">
+        <h1 class="alert">Success!</h1>
+        <p>yay, You are active successfully.</p>
+      </div>
+      <a href="/" class="button-box">
+        <h1 class="green">continue</h1>
+      </a>
+    </div>
+    <% } else {%>
+    <div id="error-box">
+      <div class="dot"></div>
+      <div class="dot two"></div>
+      <div class="face2">
+        <div class="eye"></div>
+        <div class="eye right"></div>
+        <div class="mouth sad"></div>
+      </div>
+      <div class="shadow move"></div>
+      <div class="message">
+        <h1 class="alert">Error!</h1>
+        <p>oh no, you have expired for active.
+      </div>
+      <a type="button" class="button-box" href="/">
+        <h1 class="red">Leave on</h1>
+      </a>
+      <% } %>
+    </div>
+  </div>
+
+</body>
+
+</html>

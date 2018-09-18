@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <!-- FONT AWESOME -->
+    <!-- Bootstrap core CSS-->
+    <link href="/stylesheets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MD BOOTSTRAP PRO -->
+    <link href="https://namboss.blob.core.windows.net/huong/mdb.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/font/fontawesomeProByNam.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/font.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/js-enabled.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/railscasts.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+
+    <!-- Include external CSS. -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+    <!-- Include Editor style. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/css/froala_editor.pkgd.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/css/froala_style.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <link type="image/x-icon" rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACMUlEQVQ4jYXTy04TcRQG8KkbqH0FXZDwEob5Twu2pS1padFemHaGaTuVDpdeqIjiwpo4Q7GCBKMlIDCUS5MGNIJoMATCzrjWJ9AFr6BD+7nQopBSFmdzcvLLtzgfBUBXb0a3OeP9d+KX5Br/WVoOkWw2e6XeHXV+MbIXuH7vY6g0vivgwbaI0U2xGlc5DBX59eG14LULAEqXLnv1yX3P48y+/9fYHocaMLYVw/CqAEnlkVgTfqZKwiNhWWg+A8R2O28lDh0/kofuambfj/NAuhRB/1IIgys8UhvhaqYU/X63HPEA0FHeaa+eXXCdJI7sSB14UB+IIq5y6F8KYqjYh/RGBP5X3VrrcGsTxeWthuDL21p8x9kQkFZ4RBd6IakcBlZ4GGWimbKmZorLc4bIfEALL/qQOnA3BPrmfBBfs+ie6YJJMf0Fipzhjspq4iKLwbfehgA/54P/hRvmyZton/gPkFaDWrwYhG3KjJFPjRO4njvgeGZF51PLP2Cg1Kux824QmUZg2XEpYJ7sgGvaVgOsBrHco5lyDBiFgFEI0u/ZhgCjELim7X8Ab/mGvqvQXiEyOQV6CjY8/BC+EDAqDDpyphP7rL2JAqAjMgkwCn1cA+gnNFJvgo2AY2aC8Z9+IgVKZ81bDYxM54hMVxiFwDlrxfhO7CxQ8FU8M105Z9Z5lQJVv0xMnmkhMtkkMg1pnT19ZUnlNsUFruXSNtYStcltFtuU+dvYVuxrckOwXFT737LDT1nU/++wAAAAAElFTkSuQmCC">
+
+    <title>My Blog - Details</title>
+</head>
+
+<body class="page-topic page-topic-1881 page-topic-pm2-event-catch">
+
+    <%- include components/header%>
+    <main id="panel" class=" slideout-panel">
+
+
+        <div class="container" id="content">
+            <div class="row">
+                <div class="topic col-lg-12">
+                    <ol class="breadcrumb">
+                        <li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                            <a href="/" itemprop="url">
+                                <span itemprop="title">
+                                    Home
+
+                                </span>
+                            </a>
+                        </li>
+                        <li itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                            <a href="#" itemprop="url">
+                                <span itemprop="title">
+                                    Discuss myBlog
+
+                                </span>
+                            </a>
+                        </li>
+                        <li component="breadcrumb/current" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb"
+                            class="active">
+
+                            <span itemprop="title">
+                                <%= postsid.title %>
+                                <a  href="#"><i class="fas fa-rss-square"></i></a>
+                            </span>
+
+                        </li>
+                    </ol>
+
+                    <h1 component="post/header" class="hidden-xs" itemprop="name">
+
+                        <i class="pull-left fas fa-thumb-tack hidden"></i> <i class="pull-left fas fa-lock hidden"></i>
+                        <span class="topic-title" component="topic/title"></span>
+
+                        <span class="browsing-users hidden hidden-xs hidden-sm pull-right">
+                            <span>browsing</span>
+                            <div component="topic/browsing/list" class="thread_active_users active-users inline-block"></div>
+                            <small class="hidden">
+                                <i class="fas fa-users"></i> <span component="topic/browsing/count" class="user-count"></span>
+                            </small>
+                        </span>
+                    </h1>
+
+                    <div component="topic/deleted/message" class="alert alert-warning hidden">This topic has been
+                        deleted.
+                        Only users with topic management privileges can see it.</div>
+
+                    <hr class="visible-xs">
+
+                    <ul component="topic" class="posts" data-tid="<%= postsid.id%>">
+                        <li component="post" class="posts-text" data-index="0" data-pid="<%= postsid.id%>" data-uid="<%= postsid.id%>"
+                            data-username="<%= postsid.email%>" data-userslug="thái-bình-la" itemscope="" itemtype="http://schema.org/Comment">
+                            <a component="post/anchor" data-index="0" name="0"></a>
+
+                            <meta itemprop="datePublished" content="2018-09-07T02:45:28.169Z">
+                            <meta itemprop="dateModified" content="">
+
+                            <div class="clearfix">
+                                <div class="icon pull-left">
+                                    <a>
+                                        <img component="user/picture" data-uid="3545" src="<%= postsid.user.image %>"
+                                            itemprop="image" align="left">
+                                        <i component="user/status" class="fas fa-circle status <%= status %>" title="Offline"
+                                            id="userStatusDetail"></i>
+
+                                    </a>
+                                </div>
+
+                                <small class="pull-left">
+                                    <strong>
+                                        <a href="#" itemprop="author" data-username="<%= postsid.author %>>" data-uid="4879">
+                                            <%= postsid.author %>></a>
+                                    </strong>
+                                    <div class="visible-xs-inline-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+                                        <a class="permalink" href="#"><span class="timeago" title="Fri Sep 07 2018 09:45:28 GMT+0700 (Indochina Time)">about
+                                                5 hours ago
+                                            </span></a>
+
+                                        <i class="fas fa-pencil-square pointer edit-icon hidden"></i>
+
+                                        <small data-editor="" component="post/editor" class="hidden">last edited by
+                                            <span class="timeago" title="Invalid Date"></span></small>
+
+                                        <span>
+
+                                        </span>
+                                    </div>
+                                    <span class="bookmarked"><i class="fas fa-bookmark-o"></i></span>
+
+                                </small>
+                            </div>
+
+                            <br>
+
+                            <div class="content" component="post/content" itemprop="text">
+                                <p>
+                                    <%- postsid.content %>
+                                </p>
+
+                            </div>
+
+                            <div class="clearfix">
+
+
+                                <small class="pull-right">
+                                    <span class="post-tools">
+                                        <a component="post/reply"  class="no-select ">Reply</a>
+                                        <a component="post/quote"  class="no-select ">Quote</a>
+                                    </span>
+
+                                    <span class="votes">
+                                        <a component="post/upvote"  class="">
+                                            <i class="fas fa-chevron-up"></i>
+                                        </a>
+
+                                        <span component="post/vote-count" data-votes="0">0</span>
+
+                                        <a component="post/downvote"  class="">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </a>
+                                    </span>
+
+                                    <span component="post/tools" class="dropdown moderator-tools ">
+                                        <a  data-toggle="dropdown"><i class="fas fa-fw fa-ellipsis-v"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+
+                                            <li role="presentation">
+                                                <a component="post/favourite" role="menuitem" tabindex="-1"
+                                                    data-favourited="false">
+
+                                                    <span class="favourite-text">Bookmark</span>
+                                                    <span component="post/favourite-count" class="favouriteCount"
+                                                        data-favourites="0">0</span>&nbsp;
+
+                                                    <i component="post/favourite/on" class="fas fa-heart hidden"></i>
+                                                    <i component="post/favourite/off" class="fas fa-heart-o "></i>
+                                                </a>
+                                            </li>
+
+                                            <li role="presentation" class="divider"></li>
+                                            <li role="presentation" class="dropdown-header">Share this Post</li>
+                                            <li role="presentation">
+                                                <a role="menuitem" component="share/facebook" tabindex="-1" href="#"><span
+                                                        class="menu-icon"><i class="fas fa-facebook"></i></span>
+                                                    Facebook</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" component="share/twitter" tabindex="-1" href="#"><span
+                                                        class="menu-icon"><i class="fas fa-twitter"></i></span> Twitter</a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a role="menuitem" component="share/google" tabindex="-1" href="#"><span
+                                                        class="menu-icon"><i class="fas fa-google-plus"></i></span>
+                                                    Google+</a>
+                                            </li>
+
+                                            <li role="presentation" class="divider"></li>
+                                            <li role="presentation">
+                                                <a component="post/flag" role="menuitem" tabindex="-1" href="#">
+                                                    Flag this post for moderation
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </span>
+
+                                </small>
+                            </div>
+
+                            <hr>
+                            <% if(user) { %>
+                            <div class="post-bar">
+                                <div class="clearfix">
+                                    <div class="tags pull-left">
+
+                                    </div>
+
+                                    <div class="topic-main-buttons pull-right">
+                                        <span class="loading-indicator btn pull-left hidden" done="0">
+                                            <span class="hidden-xs">Loading More Posts</span> <i class="fas fa-refresh fa-spin"></i>
+                                        </span>
+
+
+                                        <div class="stats hidden-xs">
+                                            <span class="human-readable-number" title="<%= postsid.view %>"><%= postsid.view %></span><br>
+                                            <small>Views</small>
+                                        </div>
+
+                                        <div class="btn-group action-bar ">
+                                            <button class="btn btn-primary btn-reply" component="topic/reply">Reply</button>
+                                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#" component="topic/reply-as-topic">Reply as topic</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <a component="topic/reply/locked" class="btn btn-primary hidden" disabled=""><i
+                                                class="fas fa-lock"></i> Locked</a>
+
+                                        <button component="topic/follow" class="btn btn-info ">
+                                            <span class="visible-sm-inline visible-md-inline visible-lg-inline">Watch</span>
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+
+                                        <button component="topic/unfollow" class="btn btn-warning hidden">
+                                            <span class="visible-sm-inline visible-md-inline visible-lg-inline">Unwatch</span>
+                                            <i class="fas fa-eye-slash"></i>
+                                        </button>
+
+                                        <button component="topic/mark-unread" class="btn btn-default">
+                                            <span class="visible-sm-inline visible-md-inline visible-lg-inline">Mark
+                                                unread
+                                            </span> <i class="fas fa-inbox"></i>
+                                        </button>
+
+                                        <div class="btn-group" component="thread/sort">
+                                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span
+                                                    class="visible-sm-inline visible-md-inline visible-lg-inline">Sort
+                                                    by
+                                                </span>
+                                                <span class="visible-xs-inline"><i class="fas fa-fw fa-sort"></i></span>
+                                                <span class="caret"></span></button>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#" class="oldest_to_newest" data-sort="oldest_to_newest"><i
+                                                            class="fas fa-fw fa-check"></i> Oldest to Newest</a></li>
+                                                <li><a href="#" class="newest_to_oldest" data-sort="newest_to_oldest"><i
+                                                            class="fas fa-fw"></i> Newest to Oldest</a></li>
+                                                <li><a href="#" class="most_votes" data-sort="most_votes"><i class="fas fa-fw"></i>
+                                                        Most votes</a></li>
+                                            </ul>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                            <% } else { %>
+                            <div class="post-bar">
+                                <div class="clearfix">
+                                    <div class="tags pull-left">
+
+                                    </div>
+
+                                    <div class="topic-main-buttons pull-right">
+                                        <span class="loading-indicator btn pull-left hidden" done="0" style="display: inline;">
+                                            <span class="hidden-xs">Loading More Posts</span> <i class="fas fa-refresh fa-spin"></i>
+                                        </span>
+
+
+                                        <div class="stats hidden-xs">
+                                            <span class="human-readable-number" title="<%= postsid.view %>"><%= postsid.view %></span><br>
+                                            <small>Views</small>
+                                        </div>
+
+                                        <div class="btn-group action-bar hidden">
+                                            <button class="btn btn-primary btn-reply" component="topic/reply">Reply</button>
+                                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#" component="topic/reply-as-topic">Reply as topic</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <a href="/users/login" class="btn btn-primary">Log in to reply</a>
+
+
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                            <% } %>
+
+                        </li>
+                        <% if(comments) { %>
+                        <% comments.forEach(function(comment,index){ %>
+                        <li component="post" class="" data-index="<%= index %>" data-pid="<%= comment.comment.id %>"
+                            data-uid="<%= comment.comment.parentid %>" data-username="<%= comment.comment.user.email %>"
+                            data-userslug="<%= comment.comment.user.email %>" itemscope="" itemtype="http://schema.org/Comment">
+                            <a component="post/anchor" data-index="1" name="1"></a>
+
+                            <meta itemprop="datePublished" content="2018-09-09T05:21:18.618Z">
+                            <meta itemprop="dateModified" content="">
+
+                            <div class="clearfix">
+                                <div class="icon pull-left">
+                                    <a href="/user/profile/<%= comment.comment.user.email %>">
+                                        <img component="user/picture" data-uid="<%= comment.comment.user.id %>" src="<%= comment.comment.user.image %>"
+                                            itemprop="image" align="left">
+                                        <i component="user/status" class="fas fa-circle status <%= comment.comment.user.status %>"
+                                            title="<%= comment.comment.user.status %>"></i>
+                                    </a>
+                                </div>
+
+                                <small class="pull-left">
+                                    <strong>
+                                        <a href="/user/profile/<%= comment.comment.user.email %>" itemprop="author"
+                                            data-username="<%= comment.comment.user.email %>" data-uid="<%= comment.comment.user.id %>">
+                                            <%= comment.comment.user.email %></a>
+                                    </strong>
+                                    <div class="visible-xs-inline-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
+                                        <a class="permalink" href="/details/<%= comment.comment.id %>"><span class="timeago"
+                                                title="Sun Sep 09 2018 12:21:18 GMT+0700 (Indochina Time)">a
+                                                day ago</span></a>
+
+                                        <i class="fas fa-pencil-square pointer edit-icon hidden"></i>
+
+                                        <small data-editor="" component="post/editor" class="hidden">last edited
+                                            by
+                                            <span class="timeago" title="Invalid Date"></span></small>
+                                        <span>
+                                        </span>
+                                    </div>
+                                    <span class="bookmarked"><i class="fas fa-bookmark-o"></i></span>
+                                </small>
+                            </div>
+
+                            <br>
+
+                            <div class="content" component="post/content" itemprop="text">
+                                <%- comment.comment.comment %>
+
+                            </div>
+                            <% if(user) { %>
+                            <div class="clearfix">
+                                <div component="post/signature" data-uid="411" class="post-signature">
+                                    <p><a href="#" target="_blank" rel="nofollow">
+                                            <%= comment.comment.user.email %></a></p>
+                                </div>
+
+                                <small class="pull-right">
+                                    <span class="post-tools">
+                                        <a component="post/reply" href="#" class="no-select ">Reply</a>
+                                        <a component="post/quote" href="#" class="no-select ">Quote</a>
+                                    </span>
+
+                                    <span class="votes">
+                                        <a component="post/upvote" href="#" class="">
+                                            <i class="fas fa-chevron-up"></i>
+                                        </a>
+
+                                        <span component="post/vote-count" data-votes="0">0</span>
+
+                                        <a component="post/downvote" href="#" class="">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </a>
+                                    </span>
+
+                                    <span component="post/tools" class="dropdown moderator-tools ">
+                                        <a href="#" data-toggle="dropdown"><i class="fas fa-fw fa-ellipsis-v"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
+                                    </span>
+
+                                </small>
+                            </div>
+
+                            <% } else { %>
+                            <div class="clearfix">
+                                <div component="post/signature" data-uid="411" class="post-signature">
+                                    <p><a href="#" target="_blank" rel="nofollow">
+                                            <%= comment.comment.user.email %></a></p>
+                                </div>
+
+                                <small class="pull-right">
+                                    <span class="post-tools">
+                                        <a component="post/reply" href="#" class="no-select hidden">Reply</a>
+                                        <a component="post/quote" href="#" class="no-select hidden">Quote</a>
+                                    </span>
+
+                                    <span class="votes">
+                                        <a component="post/upvote" href="#" class="">
+                                            <i class="fas fa-chevron-up"></i>
+                                        </a>
+
+                                        <span component="post/vote-count" data-votes="0">0</span>
+
+                                        <a component="post/downvote" href="#" class="">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </a>
+                                    </span>
+
+                                    <span component="post/tools" class="dropdown moderator-tools ">
+                                        <a href="#" data-toggle="dropdown"><i class="fas fa-fw fa-ellipsis-v"></i></a>
+                                        <ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
+                                    </span>
+
+                                </small>
+                            </div>
+                            <% } %>
+                            <hr>
+
+                        </li>
+                        <% }) %>
+                        <% } else { %>
+                        <div>
+                            <p>Không có comment</p>
+                        </div>
+                        <% } %>
+
+                    </ul>
+
+                    <div class="post-bar">
+                        <div class="clearfix">
+                            <div class="tags pull-left">
+
+                            </div>
+
+                            <div class="topic-main-buttons pull-right">
+                                <span class="loading-indicator btn pull-left hidden" done="0">
+                                    <span class="hidden-xs">Loading More Posts</span> <i class="fas fa-refresh fa-spin"></i>
+                                </span>
+                                <div class="stats hidden-xs">
+                                    <span class="human-readable-number" title="<%= postsid.view %>"><%= postsid.view %></span><br>
+                                    <small>Views</small>
+                                </div>
+                                <% if(user) { %>
+                                <div class="btn-group action-bar">
+                                    <button class="btn btn-primary btn-reply" component="topic/reply">Reply</button>
+                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li><a href="#" component="topic/reply-as-topic">Reply as topic</a></li>
+                                    </ul>
+                                </div>
+                                <button component="topic/follow" class="btn btn-info ">
+                                    <span class="visible-sm-inline visible-md-inline visible-lg-inline">Watch</span>
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button component="topic/mark-unread" class="btn btn-default">
+                                    <span class="visible-sm-inline visible-md-inline visible-lg-inline">Mark unread</span>
+                                    <i class="fas fa-inbox"></i>
+                                </button>
+                                <div class="btn-group" component="thread/sort">
+                                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span
+                                            class="visible-sm-inline visible-md-inline visible-lg-inline">Sort by</span>
+                                        <span class="visible-xs-inline"><i class="fas fa-fw fa-sort"></i></span>
+                                        <span class="caret"></span></button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="#" class="oldest_to_newest" data-sort="oldest_to_newest"><i class="fas fa-fw fa-check"></i>
+                                                Oldest to Newest</a></li>
+                                        <li><a href="#" class="newest_to_oldest" data-sort="newest_to_oldest"><i class="fas fa-fw"></i>
+                                                Newest to Oldest</a></li>
+                                        <li><a href="#" class="most_votes" data-sort="most_votes"><i class="fas fa-fw"></i>
+                                                Most votes</a></li>
+                                    </ul>
+                                </div>
+                                <% } else { %>
+                                <a href="/users/login" class="btn btn-primary">Log in to reply</a>
+                                <% } %>
+
+
+
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+
+
+
+                    <div class="visible-xs visible-sm pagination-block text-center ready">
+                        <div class="progress-bar" style="width: 33.3333%;"></div>
+                        <div class="wrapper">
+                            <i class="fas fa-2x fa-angle-double-up pointer fa-fw pagetop"></i>
+                            <i class="fas fa-2x fa-angle-up pointer fa-fw pageup"></i>
+                            <span class="pagination-text">1 out of 3</span>
+                            <i class="fas fa-2x fa-angle-down pointer fa-fw pagedown"></i>
+                            <i class="fas fa-2x fa-angle-double-down pointer fa-fw pagebottom"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <noscript>
+                <div component="pagination" class="text-center pagination-container hidden">
+                    <ul class="pagination">
+                        <li class="previous pull-left disabled">
+                            <a href="?" data-page="1"><i class="fas fa-chevron-left"></i> </a>
+                        </li>
+
+                        <li class="next pull-right disabled">
+                            <a href="?" data-page="1"> <i class="fas fa-chevron-right"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </noscript>
+        </div><!-- END container -->
+    </main>
+
+    <div class="hide">
+        <script type="text/tpl" data-template="500">
+<div class="alert alert-danger">
+	<strong>Internal error.</strong>
+	<p>Oops! Looks like something went wrong!</p>
+	<p></p>
+
+
+</div>
+</script>
+    </div>
+
+
+    <div class="topic-search hidden">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default count"></button>
+            <button type="button" class="btn btn-default prev"><i class="fas fa-fw fa-angle-up"></i></button>
+            <button type="button" class="btn btn-default next"><i class="fas fa-fw fa-angle-down"></i></button>
+        </div>
+    </div>
+    <div component="toaster/tray" class="alert-window"></div>
+
+
+
+    <div id="taskbar" class="taskbar navbar-fixed-bottom">
+        <div class="navbar-inner">
+            <ul class="nav navbar-nav pull-right"></ul>
+        </div>
+    </div>
+    <div component="composer" class="composer resizable" id="text-editor-detal">
+
+        <div class="composer-container">
+            <div class="row title-container">
+                <div class="col-lg-12 col-md-12">
+                    <span class="title form-control">
+                        <%= postsid.title %></span>
+                </div>
+            </div>
+
+            <div class="row category-tag-row">
+                <div class="btn-toolbar formatting-bar">
+                    <div class="btn-group pull-right action-bar">
+                        <button class="btn btn-default composer-discard" id="btn-discard" data-action="discard"
+                            tabindex="-1"><i class="fas fa-times"></i>
+                            Discard</button>
+
+                        <button class="btn btn-primary composer-submit" id="btn-submit" data-action="post" tabindex="6"><i
+                                class="fas fa-check"></i>
+                            Submit</button>
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li><a href="#" data-switch-action="post"><i class="fas fa-fw fa-check"></i> Submit</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row write-preview-container" style="height: 165px;">
+                <div class="col-12 col-sm-12 write-container">
+                    <textarea name="comment"></textarea>
+                </div>
+            </div>
+
+
+
+            <div class="imagedrop">
+                <div>Drag and Drop Images Here</div>
+            </div>
+
+            <div class="resizer">
+                <div class="trigger text-center"><i class="fa fa-arrows-alt-v"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/stylesheets/vendor/jquery/jquery.min.js"></script>
+    <script src="/stylesheets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(() => {
+            $("textarea").froalaEditor();
+        })
+    </script>
+    <!-- MD BOOTSTRAP -->
+    <script type="text/javascript" src="https://namboss.blob.core.windows.net/huong/mdb.min.js"></script>
+
+    <!-- Initialize the editor. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+    <!-- Include Editor JS files. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.4/js/froala_editor.pkgd.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
+        type="text/css" />
+    <script src="/javascripts/javascripts.js"></script>
+</body>
+
+</html>

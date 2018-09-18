@@ -1,0 +1,76 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.dsblock {
+  display: block;
+  z-index: 999;
+}
+
+.showEditor {
+  top: 50%!important;
+  visibility: visible;
+}
+
+.fr-wrapper {
+  height: 200px;
+}
+
+.navbar-nav {
+  flex-direction: row;
+}
+
+#search-button {
+  color: #666!important
+}
+
+.navbar .dropdown-menu a {
+  font-size: 1.5rem;
+}
+
+.navbar {
+  padding: 0;
+  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.btn {
+  margin: unset
+}
+
+.dropdown-toggle::after {
+  border: unset;
+  margin-left: unset;
+  content: unset;
+}
+
+.btn-default {
+  color: #333 !important;
+}
+
+.category-tag-row {
+  justify-content: flex-end;
+}
+
+.menu-container {
+  display: block!important
+}
+
+.social-btn {
+  text-align: center
+}
+
+.card-login {
+  max-width: 25rem;
+}
+
+.card-register {
+  max-width: 45rem;
+}
+
+a {
+  cursor: pointer;
+}

@@ -1,0 +1,39 @@
+{
+	"name": "myblog",
+	"version": "0.0.0",
+	"engines": {
+		"node": "10.10.0"
+	},
+	"private": true,
+	"scripts": {
+		"start": "node ./node_modules/.bin/babel-node ./bin/www",
+		"dev": "nodemon ./node_modules/.bin/babel-node ./bin/www"
+	},
+	"dependencies": {
+		"@passport-next/passport-facebook": "^3.0.0",
+		"babel-cli": "^6.26.0",
+		"babel-preset-env": "^1.7.0",
+		"bcrypt": "^3.0.0",
+		"connect-flash": "^0.1.1",
+		"connect-session-sequelize": "^5.2.2",
+		"cookie-parser": "~1.4.3",
+		"debug": "~2.6.9",
+		"ejs": "~2.5.7",
+		"express": "~4.16.0",
+		"express-session": "^1.15.6",
+		"http-errors": "~1.6.2",
+		"morgan": "~1.9.0",
+		"nodemailer": "^4.6.8",
+		"passport": "^0.4.0",
+		"passport-facebook": "^2.1.1",
+		"passport-github2": "^0.1.11",
+		"passport-google-oauth20": "^1.0.0",
+		"passport-instagram": "^1.0.0",
+		"passport-linkedin-oauth2": "^1.5.0",
+		"passport-local": "^1.0.0",
+		"passport-twitter": "^1.0.4",
+		"pg": "^7.4.3",
+		"pg-hstore": "^2.3.2",
+		"sequelize": "^4.38.0"
+	}
+}
