@@ -270,20 +270,22 @@ export const sendLinkActiveAccount = async params => {
 	const { email } = params;
 	const key = Date.now();
 	try {
-		const findUsername = await User.findOne({
-			where: {
-				email
+		const updateKey = await User.update(
+			{
+				key
+			},
+			{
+				where: {
+					email
+				}
 			}
-		});
-		if (!findUsername) {
-			return null;
+		);
+		const timeActive = Math.round((Date.now() - key) / 60000);
+		if (timeActive <= 10) {
+			const mail = await nodemailer(email, email, key, null, "active");
+			return true;
 		} else {
-			const timeActive = Math.round((Date.now() - findUsername.key) / 60000);
-			if (timeActive <=10) {
-				return true;
-			} else {
-				return false;
-			}
+			return false;
 		}
 	} catch (error) {
 		throw error;
@@ -333,7 +335,7 @@ export const userEdit = async params => {
 			const hash = await bcrypt.hash(password, Config.saltRounds);
 			const updateProfile = await User.update(
 				{
-					image,
+					image: image ? image : "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Antu_im-invisible-user.svg/2000px-Antu_im-invisible-user.svg.png" ,
 					password: hash
 				},
 				{
@@ -347,7 +349,7 @@ export const userEdit = async params => {
 		} else if (!password) {
 			const updateProfile = await User.update(
 				{
-					image
+					image: image ? image : "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Antu_im-invisible-user.svg/2000px-Antu_im-invisible-user.svg.png" ,
 				},
 				{
 					where: {

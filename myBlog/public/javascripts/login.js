@@ -95,7 +95,7 @@ function submitAjax(e) {
 						preventDuplicates: false,
 						showDuration: 300,
 						hideDuration: 1000,
-						timeOut: 3000,
+						timeOut: 1000,
 						extendedTimeOut: 1000,
 						showEasing: "swing",
 						hideEasing: "linear",
@@ -107,7 +107,7 @@ function submitAjax(e) {
 						window.location.href = `${location.protocol}//${
 							document.domain
 						}:${location.port}/`;
-					}, 3000);
+					}, 1000);
 				} else if (result.result == "failed") {
 					toastr.options = {
 						closeButton: true,
@@ -118,7 +118,7 @@ function submitAjax(e) {
 						preventDuplicates: false,
 						showDuration: 300,
 						hideDuration: 1000,
-						timeOut: 3000,
+						timeOut: 2000,
 						extendedTimeOut: 1000,
 						showEasing: "swing",
 						hideEasing: "linear",
@@ -138,7 +138,7 @@ function submitAjax(e) {
 						document
 							.querySelector("ul.items")
 							.lastChild.classList.remove("active");
-					}, 1500);
+					}, 500);
 				}
 			},
 			complete: function(complete) {

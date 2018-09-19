@@ -276,10 +276,10 @@
               <!-- Subject -->
               <select class="browser-default custom-select mb-4" name="tags">
                 <option value="" disabled>Choose a tag</option>
-                <option value="Tag A" selected>Tag A</option>
-                <option value="Tag B">Tag B</option>
-                <option value="Tag C">Tag C</option>
-                <option value="Tag D">Tag D</option>
+                <option value="General Discussion" selected>General Discussion</option>
+                <option value="Recruitment/Tuyển Dụng">Recruitment/Tuyển Dụng</option>
+                <option value="Discuss Node.JS">Discuss Node.JS </option>
+                <option value="Tutorials">Tutorials</option>
               </select>
 
               <!-- Message -->
@@ -340,7 +340,9 @@
     <script src="/stylesheets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
       $(() => {
-        $("textarea").froalaEditor();
+        $("textarea").froalaEditor({
+          height: 300
+        });
       })
     </script>
     <!-- MD BOOTSTRAP -->

@@ -3,13 +3,13 @@ import User from "../models/User";
 import CommentTB from "../models/CommentTB";
 // GET POST
 export const listAllComment = async params => {
-	const { offset,id } = params;
+	const { offset, id } = params;
 	try {
 		const allComment = await Post.findAll({
 			limit: 5,
 			offset: offset ? offset * 5 : 0,
-			where:{id},
-	/* 		attributes: [
+			where: { id },
+			/* 		attributes: [
 				"id",
 				// "username",
 				// "comment",
@@ -28,7 +28,7 @@ export const listAllComment = async params => {
 					include: [
 						{
 							model: User,
-							attributes: ["email", "image", "id","status"], //Lay username va avatar cua user tu model User
+							attributes: ["email", "image", "id", "status"], //Lay username va avatar cua user tu model User
 							required: true
 						}
 					]
@@ -59,15 +59,21 @@ export const createComment = async params => {
 					timecomment
 				},
 				{
-					fields: ["email", "comment", "parentid", "postid","timecomment"]
+					fields: [
+						"email",
+						"comment",
+						"parentid",
+						"postid",
+						"timecomment"
+					]
 				}
 			);
 			return newComment;
 		} else return null;
-
 	} catch (error) {
 		throw error;
 	}
 };
 
+//GET LAST COMMENT
 

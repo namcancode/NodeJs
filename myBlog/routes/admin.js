@@ -21,33 +21,47 @@ router.put("/editprofile", async (req, res) => {
       username,
       image
     };
-    // console.log(`password: ${password}`);
-    // console.log(`repassword: ${repassword}`);
-    if (password === repassword && image) {
-      const profilebody = await UserController.userEdit(req.body); // Cho userEdit thuc hien xong, bat dau thuc hien update // req.body.image
-      if (profilebody) {
+    if ((password === repassword && image && password) || image) {
+      const userUpdateInfo = await UserController.userEdit(req.body);
+      if (userUpdateInfo) {
+        req.user = updatedProfile;
+        req.session.save();
+          res.json({
+            result: Message.SUCCESS,
+            message: Message.UPDATESUCCESS
+          });
+      } else {
+        res.json({
+          result: Message.FAILED,
+          message: Message.UPDATEFAILED
+        });
+      }
+    } else if (password === repassword && password && !image) {
+      const userUpdateInfo = await UserController.userEdit(req.body);
+      if (userUpdateInfo) {
         req.user = updatedProfile;
         req.session.save();
         res.json({
           result: Message.SUCCESS,
           message: Message.UPDATESUCCESS
         });
-        // res.render("admin", {user: req.user, Mess1: Message.UPDATESUCCESS})
       } else {
         res.json({
           result: Message.FAILED,
           message: Message.UPDATEFAILED
         });
-        // res.render("admin", {user: req.user, Mess1: Message.REGISNOTMATCH})
       }
-    } else {
+    } else if (password != repassword|| !image || !password || !repassword) {
       res.json({
         result: Message.FAILED,
         message: Message.REGISNOTMATCH
       });
-    }
+}
   } catch (error) {
-    throw error;
+    res.json({
+      result: Message.FAILED,
+      message: `Update failed: ${error}`
+    });
   }
 });
 

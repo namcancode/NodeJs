@@ -1,5 +1,6 @@
 import Post from "../models/Post";
 import User from "../models/User";
+import CommentTB from "../models/CommentTB";
 
 // GET POST
 export const listAllPosts = async params => {
@@ -23,10 +24,30 @@ export const listAllPosts = async params => {
 				{
 					model: User,
 					attributes: ["email", "image"], //Lay username va avatar cua user tu model User
-					required: true
+					required: true,
 				}
 			]
 		});
+		const lastComment = await Post.findAll({
+			// attributes: [
+			// 	"id",
+			// 	"title",
+			// 	"content",
+			// 	"tags",
+			// 	"description",
+			// 	"createdAt",
+			// 	"updatedAt"
+			// ],
+			required: true,
+			include: [
+				{
+					model: CommentTB,
+					// attributes: ["email", "image"], //Lay username va avatar cua user tu model User
+					required: true,
+				}
+			]
+		});
+		console.log(lastComment)
 		return allPosts;
 	} catch (error) {
 		throw error;
@@ -88,8 +109,8 @@ export const createPost = async params => {
 					title,
 					content,
 					tags,
-					author:email,
-					view:0,
+					author: email,
+					view: 0,
 					timepost
 				},
 				{
@@ -112,7 +133,16 @@ export const createPost = async params => {
 
 //UPDATE POST
 export const updatePost = async (params, id) => {
-	const { title, content, image, description, tags, author, view, timepost } = params;
+	const {
+		title,
+		content,
+		image,
+		description,
+		tags,
+		author,
+		view,
+		timepost
+	} = params;
 	try {
 		const userFinded = await User.findOne({
 			where: { author }
@@ -142,13 +172,13 @@ export const updatePost = async (params, id) => {
 };
 
 //UPDATE POST VIEW
-export const updatePostView = async (params) =>{
-	const {id} = params
+export const updatePostView = async params => {
+	const { id } = params;
 	try {
 		const post = await Post.findOne({
 			where: { id }
 		});
-		post.view++
+		post.view++;
 		const editView = await Post.update(
 			{
 				view: post.view
@@ -158,26 +188,24 @@ export const updatePostView = async (params) =>{
 					id
 				}
 			}
-		)
-	} catch (error) {
-
-	}
-}
+		);
+	} catch (error) {}
+};
 
 //DELETE POST
 export const deletePost = async params => {
 	const { id } = params;
 	try {
-        const userFinded = await User.findOne({
+		const userFinded = await User.findOne({
 			where: { author }
 		});
 		if (userFinded && userFinded.isactive == "true") {
 			const destroyPost = await Post.destroy({
-                where: {
-                    id
-                }
-            });
-            return destroyPost;
+				where: {
+					id
+				}
+			});
+			return destroyPost;
 		} else return null;
 	} catch (error) {
 		throw error;

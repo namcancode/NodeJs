@@ -883,7 +883,7 @@ if(email){
 						showDuration: 300,
 						hideDuration: 1000,
 						timeOut: 10000,
-						onclick: clickActiveAccount(),
+						onclick: sendLinkActiveAccount,
 						extendedTimeOut: 1000,
 						showEasing: "swing",
 						hideEasing: "linear",
@@ -900,7 +900,7 @@ if(email){
 	}else return
 }else return
 }
-function clickActiveAccount (arguments) {
+function sendLinkActiveAccount (arguments) {
 	const email = $("#usernameNeed").text().trim();
 	const url = `${location.protocol}//${document.domain}:${
 					location.port

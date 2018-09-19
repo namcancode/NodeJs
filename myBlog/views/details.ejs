@@ -62,7 +62,7 @@
 
                             <span itemprop="title">
                                 <%= postsid.title %>
-                                <a  href="#"><i class="fas fa-rss-square"></i></a>
+                                <a href="#"><i class="fas fa-rss-square"></i></a>
                             </span>
 
                         </li>
@@ -145,24 +145,24 @@
 
                                 <small class="pull-right">
                                     <span class="post-tools">
-                                        <a component="post/reply"  class="no-select ">Reply</a>
-                                        <a component="post/quote"  class="no-select ">Quote</a>
+                                        <a component="post/reply" class="no-select ">Reply</a>
+                                        <a component="post/quote" class="no-select ">Quote</a>
                                     </span>
 
                                     <span class="votes">
-                                        <a component="post/upvote"  class="">
+                                        <a component="post/upvote" class="">
                                             <i class="fas fa-chevron-up"></i>
                                         </a>
 
                                         <span component="post/vote-count" data-votes="0">0</span>
 
-                                        <a component="post/downvote"  class="">
+                                        <a component="post/downvote" class="">
                                             <i class="fas fa-chevron-down"></i>
                                         </a>
                                     </span>
 
                                     <span component="post/tools" class="dropdown moderator-tools ">
-                                        <a  data-toggle="dropdown"><i class="fas fa-fw fa-ellipsis-v"></i></a>
+                                        <a data-toggle="dropdown"><i class="fas fa-fw fa-ellipsis-v"></i></a>
                                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
 
                                             <li role="presentation">
@@ -222,7 +222,8 @@
 
 
                                         <div class="stats hidden-xs">
-                                            <span class="human-readable-number" title="<%= postsid.view %>"><%= postsid.view %></span><br>
+                                            <span class="human-readable-number" title="<%= postsid.view %>">
+                                                <%= postsid.view %></span><br>
                                             <small>Views</small>
                                         </div>
 
@@ -291,7 +292,8 @@
 
 
                                         <div class="stats hidden-xs">
-                                            <span class="human-readable-number" title="<%= postsid.view %>"><%= postsid.view %></span><br>
+                                            <span class="human-readable-number" title="<%= postsid.view %>">
+                                                <%= postsid.view %></span><br>
                                             <small>Views</small>
                                         </div>
 
@@ -453,7 +455,8 @@
                                     <span class="hidden-xs">Loading More Posts</span> <i class="fas fa-refresh fa-spin"></i>
                                 </span>
                                 <div class="stats hidden-xs">
-                                    <span class="human-readable-number" title="<%= postsid.view %>"><%= postsid.view %></span><br>
+                                    <span class="human-readable-number" title="<%= postsid.view %>">
+                                        <%= postsid.view %></span><br>
                                     <small>Views</small>
                                 </div>
                                 <% if(user) { %>
@@ -612,7 +615,9 @@
     <script src="/stylesheets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
         $(() => {
-            $("textarea").froalaEditor();
+            $("textarea").froalaEditor({
+                height: 300
+            });
         })
     </script>
     <!-- MD BOOTSTRAP -->

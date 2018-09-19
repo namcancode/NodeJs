@@ -3,6 +3,7 @@ var router = express.Router();
 import * as Message from "../configs/config";
 import * as PostController from "../controllers/PostController";
 import * as UserController from "../controllers/UserController";
+import * as CommentController from "../controllers/CommentController"
 // import * as UserController from "../controllers/UserController";
 
 /* GET home page. */
@@ -10,6 +11,7 @@ router.get("/", async function(req, res, next) {
 	const { offset } = req.query;
 	try {
 		const allPostsInDb = await PostController.listAllPosts(req.query); //Lay tat ca post trong db
+		// console.log(allPostsInDb)
 		if (req.user) {
 			res.render("index", {
 				user: req.session.user ? req.session.user : req.user,
@@ -60,13 +62,13 @@ router.post("/checkActiveAccount", async (req, res) => {
 			res.json({
 				result: Message.SUCCESS,
 				data: checkAccount,
-				message: Message.ACCTIVESUCCESS
+				message: Message.ACTIVESUCCESS
 			});
 		} else {
 			res.json({
 				result: Message.FAILED,
 				data: checkAccount,
-				message: Message.ACCTIVEFAILED
+				message: Message.ACTIVEFAILED
 			});
 		}
 	} catch (error) {
@@ -84,9 +86,9 @@ router.post("/sendLinkActiveAccount", async (req, res) => {
 		const checkAccount = await UserController.sendLinkActiveAccount(req.body);
 		if (checkAccount) {
 			res.json({
-				result: Message.SENDLINKACTIVESUCCESS,
+				result: Message.SUCCESS,
 				data: checkAccount,
-				message: Message.ACTIVESUCCESS
+				message: Message.SENDLINKACTIVESUCCESS
 			});
 		} else {
 			res.json({

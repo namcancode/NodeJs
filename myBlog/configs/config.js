@@ -14,7 +14,7 @@ export const keySecret = 'hiehie';
 //LOGIN
 export const LOGINFAILED = 'Username or Password is incorrect!'
 export const LOGINFAILEDNOTFOUND = 'User not found!'
-export const LOGINSUCCESS = 'You have successfully logged in, will be redirected to the homepage after 3 seconds'
+export const LOGINSUCCESS = 'You have successfully logged in, will be redirected to the homepage after 1 seconds'
 
 
 //REGISTER
