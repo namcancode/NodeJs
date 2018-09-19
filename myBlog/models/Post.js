@@ -13,12 +13,6 @@ const Post = sequelize.define("post", {
   content: {
     type: Sequelize.TEXT
   },
-  image: {
-    type: Sequelize.STRING
-  },
-  description: {
-    type: Sequelize.TEXT
-  },
   tags: {
     type: Sequelize.STRING
   },

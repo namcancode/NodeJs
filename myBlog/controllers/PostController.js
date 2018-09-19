@@ -76,7 +76,7 @@ export const getPostById = async params => {
 
 //CREATE POST
 export const createPost = async params => {
-	const { title, content, image, description, tags, email } = params;
+	const { title, content, tags, email } = params;
 	try {
 		const userFinded = await User.findOne({
 			where: { email }
@@ -87,8 +87,6 @@ export const createPost = async params => {
 				{
 					title,
 					content,
-					image,
-					description,
 					tags,
 					author:email,
 					view:0,
@@ -98,8 +96,6 @@ export const createPost = async params => {
 					fields: [
 						"title",
 						"content",
-						"image",
-						"description",
 						"tags",
 						"author",
 						"view",

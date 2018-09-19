@@ -1,6 +1,7 @@
 let nodemailer = require("nodemailer");
 import {mailresetpass} from '../template/mailresetpass'
 import {mailupdatepass} from '../template/mailupdatepass'
+import {mailActive} from '../template/mailactive'
 module.exports = async function(email, username,password, key, boo) {
 	let transporter = nodemailer.createTransport({
 		service: "gmail",
@@ -11,7 +12,7 @@ module.exports = async function(email, username,password, key, boo) {
 		}
 	});
 	let mailOptions;
-	if (boo) {
+	if (boo == "reset") {
     //có boo thì là reset pass, không có là tạo user
 		mailOptions = {
 			from: '"BlogNodeJs 👻" <nam.javascript@gmail.com>', // sender address
@@ -20,14 +21,22 @@ module.exports = async function(email, username,password, key, boo) {
 
 			html: mailresetpass(email)
 		}
-	}else {
+	}else if(boo=="welcome"){
 		mailOptions = {
 			from: '"BlogNodeJs 👻 " <nam.javascript@gmail.com>', // sender address
 			to: `${email}`, // list of receivers
 			subject: "Welcome to Blog Nodejs. This is your password ✔", // Subject line
 			html:mailupdatepass(email,password)
 		};
+	}else if(boo=="active"){
+		mailOptions = {
+			from: '"BlogNodeJs 👻 " <nam.javascript@gmail.com>', // sender address
+			to: `${email}`, // list of receivers
+			subject: "Active Account Blog Nodejs.✔", // Subject line
+			html:mailActive(email,password)
+		};
 	}
+
 
 		// send email with defined transport object
 		transporter.sendMail(mailOptions, (error, info) => {

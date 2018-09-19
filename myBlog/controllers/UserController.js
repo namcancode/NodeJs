@@ -13,7 +13,6 @@ import keyPassport from "../configs/keyPassport";
 import * as Config from "../configs/config";
 const Init = require("../Utils/Init");
 import nodemailer from "../configs/nodemailer";
-import { EROFS } from "constants";
 //LOGIN PASSPORT LOCAL
 passport.use(
 	new LocalStrategy(
@@ -120,7 +119,7 @@ export const newUser = async params => {
 					]
 				}
 			);
-			const mail = await nodemailer(email, email, password, key, null);
+			const mail = await nodemailer(email, email, null, null, "welcome");
 			return newUser;
 		} else {
 			const newUser = null;
@@ -169,7 +168,7 @@ export const sendLinkResetPassword = async params => {
 			}
 		);
 		if (findUsername) {
-			const mail = await nodemailer(email, email, key, null, true);
+			const mail = await nodemailer(email, email, key, null, "reset");
 			return true;
 		} else {
 			return null;
@@ -193,7 +192,7 @@ export const updatePassword = async params => {
 			const updatePass = await User.update(
 				{
 					password: hash,
-					key:""
+					key: ""
 				},
 				{
 					where: {
@@ -226,7 +225,7 @@ export const activeAccount = async params => {
 			const updateActive = await User.update(
 				{
 					isactive: "true",
-					key:""
+					key: ""
 				},
 				{
 					where: {
@@ -237,6 +236,54 @@ export const activeAccount = async params => {
 			return updateActive;
 		} else {
 			return null;
+		}
+	} catch (error) {
+		throw error;
+	}
+};
+
+//CHECK ACTIVE ACCOUNT
+export const checkActiveAccount = async params => {
+	const { email } = params;
+	try {
+		const findUsername = await User.findOne({
+			where: {
+				email
+			}
+		});
+		if (!findUsername) {
+			return null;
+		} else {
+			if (findUsername.isactive == "true") {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	} catch (error) {
+		throw error;
+	}
+};
+
+//SEND LINK ACTIVE ACCOUNT
+export const sendLinkActiveAccount = async params => {
+	const { email } = params;
+	const key = Date.now();
+	try {
+		const findUsername = await User.findOne({
+			where: {
+				email
+			}
+		});
+		if (!findUsername) {
+			return null;
+		} else {
+			const timeActive = Math.round((Date.now() - findUsername.key) / 60000);
+			if (timeActive <=10) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	} catch (error) {
 		throw error;

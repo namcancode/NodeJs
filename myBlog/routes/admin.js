@@ -78,19 +78,16 @@ router.get("/allposts/", async (req, res) => {
 
 // CREATE POST
 router.post("/newpost", async (req, res) => {
-  const { title, content, image, description, tags, email } = req.body;
+  const { title, content, tags, email } = req.body;
   try {
     const postbody = await PostController.createPost(req.body);
-
     if (postbody) {
       res.json({
         result:Message.SUCCESS,
         message: Message.POSTCREATESUCCESS,
-        data: {title,content,image,description,tags,author}
+        data: {}
       });
     } else {
-      // console.log("failed hello");
-      // res.render("admin", {Error3: Message.POSTFAILED})
       res.json({
         result:Message.FAILED,
         message: Message.POSTCREATEFAILED,

@@ -474,7 +474,7 @@ function morePostWithScroll(e) {
 						isAjaxLoading = !isAjaxLoading; //trả lại cho biến ajax thành false để gọi tiếp ajax nếu cuộn
 					}
 				});
-			} else {
+			} else if(window.location.pathname.split("/")[1]==="details"){
 				const id = $(".posts-text[data-uid]").data("uid");
 				$.ajax({
 					url: `${url}/details/apiMoreComment`,
@@ -845,8 +845,131 @@ $("#btn-submit").click(function(e) {
 	}
 });
 
+function checkActiveAccount () {
 
+	const email = $("#usernameNeed").text().trim();
+	const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|vn|pro|tk|ml|ga|gq|co|edu|gov|ooo|cn|uk|tv|int|asia|shop|website|email|top)\b/;
+if(email){
+	const checkEmail = regex.test(email);
+	const url = `${location.protocol}//${document.domain}:${
+					location.port
+				}/checkActiveAccount`;
+	if (checkEmail){
+		$.ajax({
+			url: url,
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
+			type: "POST",
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+				"Access-Control-Allow-Origin": "*"
+			},
+			async: true,
+			data: { email },
+			dataType: "json",
+			success: function(result) {
+				if (result.result == "success") {
+					return
+				} else {
+					toastr.options = {
+						closeButton: true,
+						debug: false,
+						newestOnTop: true,
+						progressBar: true,
+						positionClass: "toast-bottom-right",
+						preventDuplicates: false,
+						showDuration: 300,
+						hideDuration: 1000,
+						timeOut: 10000,
+						onclick: clickActiveAccount(),
+						extendedTimeOut: 1000,
+						showEasing: "swing",
+						hideEasing: "linear",
+						showMethod: "fadeIn",
+						hideMethod: "fadeOut"
+					};
+					toastr["info"](
+						`${result.message}`,
+						"Notification"
+					);
+				}
+			}
+		});
+	}else return
+}else return
+}
+function clickActiveAccount (arguments) {
+	const email = $("#usernameNeed").text().trim();
+	const url = `${location.protocol}//${document.domain}:${
+					location.port
+				}/sendLinkActiveAccount`;
+	if (!isAjaxLoading) {
+		//sử dụng phương thức cắm cờ để check xem ajax có đang hoạt động không, false thì bắt đầu chạy ajax
+		isAjaxLoading = !isAjaxLoading; // ajax đang chạy chuyển biến thành true ngăn ko chạy lặp lại
+		$.ajax({
+			url: url,
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
+			type: "POST",
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+				"Access-Control-Allow-Origin": "*"
+			},
+			async: true,
+			data: { email },
+			dataType: "json",
+			success: function(notice) {
+				if (notice.result === "success") {
+					toastr.options = {
+						closeButton: true,
+						debug: false,
+						newestOnTop: true,
+						progressBar: true,
+						positionClass: "toast-top-right",
+						preventDuplicates: false,
+						showDuration: 300,
+						hideDuration: 1000,
+						timeOut: 3000,
+						extendedTimeOut: 1000,
+						showEasing: "swing",
+						hideEasing: "linear",
+						showMethod: "fadeIn",
+						hideMethod: "fadeOut"
+					};
+					toastr["success"](`${notice.message}`, "Notification");
+
+				} else if (notice.result == "failed") {
+					toastr.options = {
+						closeButton: true,
+						debug: false,
+						newestOnTop: true,
+						progressBar: true,
+						positionClass: "toast-top-right",
+						preventDuplicates: false,
+						showDuration: 300,
+						hideDuration: 1000,
+						timeOut: 3000,
+						extendedTimeOut: 1000,
+						showEasing: "swing",
+						hideEasing: "linear",
+						showMethod: "fadeIn",
+						hideMethod: "fadeOut"
+					};
+					toastr["error"](`${notice.message}`, "Notification");
+				}
+			},
+			complete: function(data) {
+				isAjaxLoading = !isAjaxLoading; //trả lại cho biến ajax thành false để gọi tiếp ajax nếu cuộn
+			}
+		});
+	}
+}
 $(function() {
+	checkActiveAccount()
 	if (window.location.pathname.split("/").pop() == "register") {
 		const regex = new RegExp(
 			'^(([^<>()[\\]\\\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\"]+)*)|' +

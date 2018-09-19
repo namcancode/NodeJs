@@ -54,5 +54,10 @@ export const PASSWORDUPDATESUCCESS = 'Your Password Update Success'
 export const PASSWORDUPDATEFAILED = 'Your Password Update Failed'
 export const PASSWORDUPDATEWRONG = 'Passwords Are Not The Same'
 
+//ACTIVE
+export const ACTIVESUCCESS = "You have successfully activated"
+export const ACTIVEFAILED = "You have not yet activated your account.You will not be able to write or discuss.Please click here to confirm your email."
 
-
+export const SENDLINKACTIVESUCCESS = "We have sent email to you"
+export const SENDLINKACTIVEFAILED = "Wrong! We can't sent email to you"
+export const SENDLINKACTIVETIMEOUT = "Confirmation email already sent, please wait 10 minute(s) to send another one."

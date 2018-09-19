@@ -214,7 +214,6 @@
                 <thead>
                   <tr>
                     <th>Title</th>
-                    <th>Description</th>
                     <th>Content</th>
                     <th>Tags</th>
                     <th>Author</th>
@@ -224,7 +223,6 @@
                 <tfoot>
                   <tr>
                     <th>Title</th>
-                    <th>Description</th>
                     <th>Content</th>
                     <th>Tags</th>
                     <th>Author</th>
@@ -236,9 +234,6 @@
                   <tr>
                     <td>
                       <%= post.title %>
-                    </td>
-                    <td>
-                      <%= post.description %>
                     </td>
                     <td>
                       <%- post.content %>
@@ -275,10 +270,6 @@
 
               <!-- Name -->
               <input type="text" id="defaultContactFormName1" class="form-control mb-4" name="title" placeholder="Enter your topic title here...">
-              <!-- Description -->
-              <input type="text" id="defaultContactFormName2" class="form-control mb-4" name="description" placeholder="Enter your description here...">
-              <!-- IMAGE -->
-              <input type="text" id="defaultContactFormName3" class="form-control mb-4" name="image" placeholder="Enter your image url here...">
               <!-- AUTHOR -->
               <input type="text" id="defaultContactFormName4" class="form-control mb-4 d-none" name="email" value="<%= user.email %>">
 
