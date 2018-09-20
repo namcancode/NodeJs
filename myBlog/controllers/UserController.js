@@ -119,7 +119,7 @@ export const newUser = async params => {
 					]
 				}
 			);
-			const mail = await nodemailer(email, email, null, null, "welcome");
+			const mail = await nodemailer(email, email, password, null, "welcome");
 			return newUser;
 		} else {
 			const newUser = null;
@@ -140,7 +140,7 @@ export const checkTimeoutLink = async params => {
 		});
 		const timeActive = Math.round((Date.now() - findUsername.key) / 60000);
 		if (parseInt(timeActive) <= 15) {
-			return timeActive;
+			return true;
 		} else {
 			return null;
 		}

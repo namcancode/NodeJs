@@ -359,7 +359,7 @@ $(".user-status").click(function(e) {
 			"Access-Control-Allow-Origin": "*"
 		},
 		async: true,
-		data: {email, status},
+		data: { email, status },
 		//   data: $("form").serialize(),
 		dataType: "json",
 		success: function(result) {
@@ -399,72 +399,42 @@ function morePostWithScroll(e) {
 					success: function(result) {
 						if (result.result === "success") {
 							const { data } = result; //nhận kết quá của api trả về
-							data.forEach(post => {
-								//data là 20 bài post dạng array nên lặp từng post rồi append vô body
+							data.forEach((post,index) => {
 								$(".topic-list").append(`
-				<li component="category/topic" class="row clearfix unread" data-tid="1878" data-index="" data-cid="4" itemprop="itemListElement">
-				<meta itemprop="name" content="${post.content}">
+								<li component="category/topic" class="row clearfix unread" data-tid="1878" data-index="${index}"
+								data-cid="${index}" itemprop="itemListElement">
+								<meta itemprop="name" content="">
+								<div class="col-md-7 col-sm-9 col-xs-10 content">
+								  <div class="avatar pull-left" data-original-title="" title="">
+									<a href="#" class="pull-left">
+									  <img component="user/picture" data-uid="4866" src="${post.user.image}" class="user-img" title="${post.user.username}"
+										data-original-title="${post.user.username}">
+									</a>
+								  </div>
+								  <h2 component="topic/header" class="title">
+									<i component="topic/pinned" class="fas fa-thumb-tack hide"></i>
+									<i component="topic/locked" class="fas fa-lock hide"></i>
+									<a href="/details/topic/${post.id}" itemprop="url">
+									  ${post.title}></a><br>
+									<small>
+									  <a href="#"><span class="fa-stack fa-lg"><i style="color:#e95c5a;"
+											class="fas fa-circle fa-stack-2x"></i><i style="color:#fff;" class="fas fa-question fa-stack-1x"></i></span>
+										${post.tags}</a> •
+									</small>
+									<span class="tag-list hidden-xs">
+									</span>
+								  </h2>
+								</div>
 
-				<div class="col-md-7 col-sm-9 col-xs-10 content">
-					<div class="avatar pull-left" data-original-title="" title="">
-
-
-						<a href="#" class="pull-left">
-							<img component="user/picture" data-uid="4866" src="${
-								post.user.image
-							}" class="user-img" title="" data-original-title="${
-									post.user.email
-								}"">
-						</a>
-
-					</div>
-
-					<h2 component="topic/header" class="title">
-						<i component="topic/pinned" class="fa fa-thumb-tack hide"></i>
-						<i component="topic/locked" class="fa fa-lock hide"></i>
-						<a href="/details/topic/${post.id}" itemprop="url">${post.title}"</a><br>
-
-						<small>
-							<a href="/category/4/general-discussion"><span class="fa-stack fa-lg"><i style="color:#e95c5a;" class="fas fa-circle fa-stack-2x"></i><i
-										style="color:#fff;" class="fas fa-question fa-stack-1x"></i></span>
-										${post.tags}"</a> •
-						</small>
-
-						<span class="tag-list hidden-xs">
-
-
-						</span>
-
-						<small class="hidden-xs"><span class="timeago" title="Wed Sep 05 2018 17:25:18 GMT+0700 (Indochina Time)">a
-								day ago</span></small>
-						<small class="visible-xs-inline">
-							<span class="timeago" title="Wed Sep 05 2018 17:25:18 GMT+0700 (Indochina Time)">a day ago</span>
-						</small>
-					</h2>
-				</div>
-
-				<div class="mobile-stat col-xs-2 visible-xs text-right">
-					<span class="human-readable-number">1</span> <a href="#"><i class="fa fa-arrow-circle-right"></i></a>
-				</div>
-
-				<div class="col-md-1 hidden-sm hidden-xs stats">
-					<span class="human-readable-number" title="1">1</span><br>
-					<small>Posts</small>
-				</div>
-
-				<div class="col-md-1 hidden-sm hidden-xs stats">
-					<span class="human-readable-number" title="47">47</span><br>
-					<small>Views</small>
-				</div>
-
-				<div class="col-md-3 col-sm-3 teaser hidden-xs">
-					<div class="card" style="border-color: #e95c5a">
-						<p>
-							No one has replied
-						</p>
-					</div>
-				</div>
-			</li>
+								<div class="mobile-stat col-xs-2 visible-xs text-right">
+								  <span class="human-readable-number">1</span> <a href="#"><i class="fas fa-arrow-circle-right"></i></a>
+								</div>
+								<div class="col-md-5 hidden-sm hidden-xs stats">
+								  <span class="human-readable-number" title="${post.view}">
+									${post.view}</span><br>
+								  <small>Views</small>
+								</div>
+							  </li>
 				`);
 							});
 						}
@@ -474,7 +444,7 @@ function morePostWithScroll(e) {
 						isAjaxLoading = !isAjaxLoading; //trả lại cho biến ajax thành false để gọi tiếp ajax nếu cuộn
 					}
 				});
-			} else if(window.location.pathname.split("/")[1]==="details"){
+			} else if (window.location.pathname.split("/")[1] === "details") {
 				const id = $(".posts-text[data-uid]").data("uid");
 				$.ajax({
 					url: `${url}/details/apiMoreComment`,
@@ -519,7 +489,6 @@ function morePostWithScroll(e) {
 													title="${comment.comment.user.status}"></i>
 									</a>
 							</div>
-
 							<small class="pull-left">
 									<strong>
 											<a href="/user/profile/${comment.comment.user.email}" itemprop="author"
@@ -544,22 +513,15 @@ function morePostWithScroll(e) {
 									<span class="bookmarked"><i class="fas fa-bookmark-o"></i></span>
 							</small>
 					</div>
-
 					<br>
-
 					<div class="content" component="post/content" itemprop="text">
 							${comment.comment.comment}
-
 					</div>
-
 					<hr>
-
 			</li>
 															<a component="post/anchor" data-index="1" name="1"></a>
-
 															<meta itemprop="datePublished" content="2018-09-09T05:21:18.618Z">
 															<meta itemprop="dateModified" content="">
-
 															<div class="clearfix">
 																	<div class="icon pull-left">
 																			<a href="/user/profile/${comment.comment.user.email}">
@@ -620,36 +582,28 @@ function morePostWithScroll(e) {
 																			<p><a href="#" target="_blank" rel="nofollow">
 																			${comment.comment.user.email}</a></p>
 																	</div>
-
 																	<small class="pull-right">
 																			<span class="post-tools">
 																					<a component="post/reply" href="#" class="no-select ">Reply</a>
 																					<a component="post/quote" href="#" class="no-select ">Quote</a>
 																			</span>
-
 																			<span class="votes">
 																					<a component="post/upvote" href="#" class="">
 																							<i class="fas fa-chevron-up"></i>
 																					</a>
-
 																					<span component="post/vote-count" data-votes="0">0</span>
 
 																					<a component="post/downvote" href="#" class="">
 																							<i class="fas fa-chevron-down"></i>
 																					</a>
 																			</span>
-
 																			<span component="post/tools" class="dropdown moderator-tools ">
 																					<a href="#" data-toggle="dropdown"><i class="fas fa-fw fa-ellipsis-v"></i></a>
 																					<ul class="dropdown-menu dropdown-menu-right" role="menu"></ul>
 																			</span>
-
 																	</small>
 															</div>
-
-
 															<hr>
-
 													</li>
 					`);
 							});
@@ -845,66 +799,66 @@ $("#btn-submit").click(function(e) {
 	}
 });
 
-function checkActiveAccount () {
-
-	const email = $("#usernameNeed").text().trim();
+function checkActiveAccount() {
+	const email = $("#usernameNeed")
+		.text()
+		.trim();
 	const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|vn|pro|tk|ml|ga|gq|co|edu|gov|ooo|cn|uk|tv|int|asia|shop|website|email|top)\b/;
-if(email){
-	const checkEmail = regex.test(email);
-	const url = `${location.protocol}//${document.domain}:${
-					location.port
-				}/checkActiveAccount`;
-	if (checkEmail){
-		$.ajax({
-			url: url,
-			xhrFields: {
-				withCredentials: true
-			},
-			crossDomain: true,
-			type: "POST",
-			headers: {
-				"Content-Type": "application/x-www-form-urlencoded",
-				"Access-Control-Allow-Origin": "*"
-			},
-			async: true,
-			data: { email },
-			dataType: "json",
-			success: function(result) {
-				if (result.result == "success") {
-					return
-				} else {
-					toastr.options = {
-						closeButton: true,
-						debug: false,
-						newestOnTop: true,
-						progressBar: true,
-						positionClass: "toast-bottom-right",
-						preventDuplicates: false,
-						showDuration: 300,
-						hideDuration: 1000,
-						timeOut: 10000,
-						onclick: sendLinkActiveAccount,
-						extendedTimeOut: 1000,
-						showEasing: "swing",
-						hideEasing: "linear",
-						showMethod: "fadeIn",
-						hideMethod: "fadeOut"
-					};
-					toastr["info"](
-						`${result.message}`,
-						"Notification"
-					);
+	if (email) {
+		const checkEmail = regex.test(email);
+		const url = `${location.protocol}//${document.domain}:${
+			location.port
+		}/checkActiveAccount`;
+		if (checkEmail) {
+			$.ajax({
+				url: url,
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				type: "POST",
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded",
+					"Access-Control-Allow-Origin": "*"
+				},
+				async: true,
+				data: { email },
+				dataType: "json",
+				success: function(result) {
+					if (result.result == "success") {
+						return;
+					} else {
+						toastr.options = {
+							closeButton: true,
+							debug: false,
+							newestOnTop: true,
+							progressBar: true,
+							positionClass: "toast-bottom-right",
+							preventDuplicates: false,
+							showDuration: 300,
+							hideDuration: 1000,
+							timeOut: 10000,
+							onclick: sendLinkActiveAccount,
+							extendedTimeOut: 1000,
+							showEasing: "swing",
+							hideEasing: "linear",
+							showMethod: "fadeIn",
+							hideMethod: "fadeOut"
+						};
+						toastr["info"](`${result.message}`, "Notification");
+					}
 				}
-			}
-		});
-	}else return
-}else return
+			});
+		} else return;
+	} else return;
 }
-function sendLinkActiveAccount (arguments) {
-	const email = $("#usernameNeed").text().trim();
+function sendLinkActiveAccount(arguments) {
+	const email = $("#usernameNeed")
+		.text()
+		.trim();
 	const url = `${location.protocol}//${document.domain}:${
-					location.port
-				}/sendLinkActiveAccount`;
+		location.port
+	}/sendLinkActiveAccount`;
 	if (!isAjaxLoading) {
 		//sử dụng phương thức cắm cờ để check xem ajax có đang hoạt động không, false thì bắt đầu chạy ajax
 		isAjaxLoading = !isAjaxLoading; // ajax đang chạy chuyển biến thành true ngăn ko chạy lặp lại
@@ -941,7 +895,6 @@ function sendLinkActiveAccount (arguments) {
 						hideMethod: "fadeOut"
 					};
 					toastr["success"](`${notice.message}`, "Notification");
-
 				} else if (notice.result == "failed") {
 					toastr.options = {
 						closeButton: true,
@@ -969,7 +922,7 @@ function sendLinkActiveAccount (arguments) {
 	}
 }
 $(function() {
-	checkActiveAccount()
+	checkActiveAccount();
 	if (window.location.pathname.split("/").pop() == "register") {
 		const regex = new RegExp(
 			'^(([^<>()[\\]\\\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\"]+)*)|' +
@@ -1151,5 +1104,103 @@ $(function() {
 	}
 });
 
+$(".admin-delete-btn").click(e => {
+	const idToDelete = $($(e.target).parent())
+		.parent()
+		.find(".admin-post-title")
+		.data(`id`);
+	$("#sosureBtn").click(e => {
+		e.preventDefault();
+		const url = `${location.protocol}//${document.domain}:${
+			location.port
+		}/admin/deletepost`;
+		$.ajax({
+			url: url,
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true,
+			type: "DELETE",
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+				"Access-Control-Allow-Origin": "*"
+			},
+			async: true,
+			data: {
+				id: idToDelete
+			},
+			// data: $(".form-horizontal").serialize(),
+			dataType: "json",
+			success: function(result) {
+				// console.log("create thanh cong");
+				if (result.result == "success") {
+					toastr.options = {
+						closeButton: false,
+						debug: false,
+						newestOnTop: true,
+						progressBar: true,
+						positionClass: "toast-top-right",
+						preventDuplicates: false,
+						showDuration: 300,
+						hideDuration: 1000,
+						timeOut: 2000,
+						extendedTimeOut: 1000,
+						showEasing: "swing",
+						hideEasing: "linear",
+						showMethod: "fadeIn",
+						hideMethod: "fadeOut"
+					};
+					toastr["success"](`${result.message}`, "Notification");
+					window.location.href = `${location.protocol}//${
+						document.domain
+					}:${location.port}/admin`;
+				} else if (result.result == "failed") {
+					// console.log(`khong create duoc`);
+					toastr.options = {
+						closeButton: false,
+						debug: false,
+						newestOnTop: true,
+						progressBar: true,
+						positionClass: "toast-top-right",
+						preventDuplicates: false,
+						showDuration: 300,
+						hideDuration: 1000,
+						timeOut: 2000,
+						extendedTimeOut: 1000,
+						showEasing: "swing",
+						hideEasing: "linear",
+						showMethod: "fadeIn",
+						hideMethod: "fadeOut"
+					};
+					toastr["error"](`${result.message}`, "Notification");
+				}
+			}
+		});
+	});
+});
 
+$(".admin-edit-btn").click(function(e) {
+	// console.log('admin-edit-btn');
+	$("#defaultContactFormName1").val(
+	  `${$($(this).parent())
+		.parent()
+		.find(".admin-post-title")
+		.text()
+		.trim()}`
+	);
+	$(".category-list").val(
+	  `${$($(this).parent())
+		.parent()
+		.find(".admin-post-tags")
+		.text()
+		.trim()}`
+	);
 
+	$("textarea").froalaEditor('html.set',`
+	${$($(this).parent())
+		.parent()
+		.find(".admin-post-content")
+		.text()
+		.trim()}
+	`);
+  });

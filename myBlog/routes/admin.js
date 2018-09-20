@@ -145,14 +145,10 @@ router.put("/editpost/:id", async (req, res) => {
 });
 
 // DELETE POST
-router.delete("/deletepost/:id", async (req, res) => {
-  const { title, content, image, description, tags, author } = req.body;
-  const { id } = req.params;
-  // id= req.params.id
-  // console.log('id :', id);
+router.delete("/deletepost", async (req, res) => {
+  const { id} = req.body;
   try {
-    const posttodelete = await PostController.deletePost(req.params);
-    // console.log('posttodelete :', posttodelete);
+    const posttodelete = await PostController.deletePost(req.body);
     if (posttodelete) {
       res.json({
         result: Message.SUCCESS,

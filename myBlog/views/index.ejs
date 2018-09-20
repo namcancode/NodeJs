@@ -57,64 +57,38 @@
             <% postss.forEach(function(post,index){ %>
             <li component="category/topic" class="row clearfix unread" data-tid="1878" data-index="<%=  index %>"
               data-cid=" <%=  index %>" itemprop="itemListElement">
-              <meta itemprop="name" content="Làm Sản Phẩm Thất Bại và Những Bài Học Xương Máu">
-
+              <meta itemprop="name" content="">
               <div class="col-md-7 col-sm-9 col-xs-10 content">
                 <div class="avatar pull-left" data-original-title="" title="">
-
-
                   <a href="#" class="pull-left">
                     <img component="user/picture" data-uid="4866" src="<%= post.user.image%>" class="user-img" title=""
                       data-original-title="<%= post.user.username%>">
                   </a>
-
                 </div>
-
                 <h2 component="topic/header" class="title">
                   <i component="topic/pinned" class="fas fa-thumb-tack hide"></i>
                   <i component="topic/locked" class="fas fa-lock hide"></i>
                   <a href="/details/topic/<%= post.id %>" itemprop="url">
                     <%= post.title%></a><br>
-
                   <small>
-                    <a href="/category/4/general-discussion"><span class="fa-stack fa-lg"><i style="color:#e95c5a;"
+                    <a href="#"><span class="fa-stack fa-lg"><i style="color:#e95c5a;"
                           class="fas fa-circle fa-stack-2x"></i><i style="color:#fff;" class="fas fa-question fa-stack-1x"></i></span>
                       <%= post.tags%></a> •
                   </small>
-
                   <span class="tag-list hidden-xs">
-
-
                   </span>
-
-                 
                 </h2>
               </div>
 
               <div class="mobile-stat col-xs-2 visible-xs text-right">
                 <span class="human-readable-number">1</span> <a href="#"><i class="fas fa-arrow-circle-right"></i></a>
               </div>
-
-              <div class="col-md-1 hidden-sm hidden-xs stats">
-                <span class="human-readable-number" title="1">1</span><br>
-                <small>Posts</small>
-              </div>
-
-              <div class="col-md-1 hidden-sm hidden-xs stats">
+              <div class="col-md-5 hidden-sm hidden-xs stats">
                 <span class="human-readable-number" title="<%= post.view%>">
                   <%= post.view%></span><br>
                 <small>Views</small>
               </div>
-
-              <div class="col-md-3 col-sm-3 teaser hidden-xs">
-                <div class="card" style="border-color: #e95c5a">
-                  <p>
-                    No one has replied
-                  </p>
-                </div>
-              </div>
             </li>
-
             <% }); %>
           </ul>
 

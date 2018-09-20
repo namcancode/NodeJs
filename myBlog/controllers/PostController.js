@@ -10,44 +10,15 @@ export const listAllPosts = async params => {
 			limit: 20,
 			offset: offset ? offset * 20 : 0,
 			order: [["timepost", "DESC"]],
-			// attributes: [
-			// 	"id",
-			// 	"title",
-			// 	"content",
-			// 	"tags",
-			// 	"description",
-			// 	"createdAt",
-			// 	"updatedAt"
-			// ],
 			required: true,
 			include: [
 				{
 					model: User,
 					attributes: ["email", "image"], //Lay username va avatar cua user tu model User
-					required: true,
+					required: true
 				}
 			]
 		});
-		const lastComment = await Post.findAll({
-			// attributes: [
-			// 	"id",
-			// 	"title",
-			// 	"content",
-			// 	"tags",
-			// 	"description",
-			// 	"createdAt",
-			// 	"updatedAt"
-			// ],
-			required: true,
-			include: [
-				{
-					model: CommentTB,
-					// attributes: ["email", "image"], //Lay username va avatar cua user tu model User
-					required: true,
-				}
-			]
-		});
-		console.log(lastComment)
 		return allPosts;
 	} catch (error) {
 		throw error;
@@ -196,17 +167,12 @@ export const updatePostView = async params => {
 export const deletePost = async params => {
 	const { id } = params;
 	try {
-		const userFinded = await User.findOne({
-			where: { author }
+		const destroyPost = await Post.destroy({
+			where: {
+				id
+			}
 		});
-		if (userFinded && userFinded.isactive == "true") {
-			const destroyPost = await Post.destroy({
-				where: {
-					id
-				}
-			});
-			return destroyPost;
-		} else return null;
+		return destroyPost;
 	} catch (error) {
 		throw error;
 	}
