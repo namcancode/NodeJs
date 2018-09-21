@@ -30,7 +30,7 @@ export const UPDATEFAILED = 'Update failed!'
 export const LOGOUTSUCCESS = 'Logout successfully!'
 
 //POST
-export const POSTCREATEFAILED = 'Missing some information to create new post!'
+export const POSTCREATEFAILED = 'Created post failed'
 export const POSTCREATESUCCESS = 'Created post successfully'
 export const POSTSHOWSUCCESS = 'Show more post successfully'
 export const POSTSHOWFAILED = 'Show more post failed'

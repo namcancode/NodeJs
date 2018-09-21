@@ -399,7 +399,7 @@ function morePostWithScroll(e) {
 					success: function(result) {
 						if (result.result === "success") {
 							const { data } = result; //nhận kết quá của api trả về
-							data.forEach((post,index) => {
+							data.forEach((post, index) => {
 								$(".topic-list").append(`
 								<li component="category/topic" class="row clearfix unread" data-tid="1878" data-index="${index}"
 								data-cid="${index}" itemprop="itemListElement">
@@ -407,7 +407,11 @@ function morePostWithScroll(e) {
 								<div class="col-md-7 col-sm-9 col-xs-10 content">
 								  <div class="avatar pull-left" data-original-title="" title="">
 									<a href="#" class="pull-left">
-									  <img component="user/picture" data-uid="4866" src="${post.user.image}" class="user-img" title="${post.user.username}"
+									  <img component="user/picture" data-uid="4866" src="${
+											post.user.image
+										}" class="user-img" title="${
+									post.user.username
+								}"
 										data-original-title="${post.user.username}">
 									</a>
 								  </div>
@@ -656,8 +660,7 @@ $("#btn-submit").click(function(e) {
 	const comment = $("textarea").froalaEditor("html.get");
 	const postid = $(".posts-text[data-uid]").data("uid");
 	if (!isAjaxLoading) {
-		//sử dụng phương thức cắm cờ để check xem ajax có đang hoạt động không, false thì bắt đầu chạy ajax
-		isAjaxLoading = !isAjaxLoading; // ajax đang chạy chuyển biến thành true ngăn ko chạy lặp lại
+		isAjaxLoading = !isAjaxLoading;
 		$.ajax({
 			url: url,
 			xhrFields: {
@@ -1104,103 +1107,117 @@ $(function() {
 	}
 });
 
-$(".admin-delete-btn").click(e => {
-	const idToDelete = $($(e.target).parent())
+$(".admin-delete-btn").click(function(e) {
+	const idToDelete = $($(this).parent())
 		.parent()
 		.find(".admin-post-title")
 		.data(`id`);
-	$("#sosureBtn").click(e => {
-		e.preventDefault();
-		const url = `${location.protocol}//${document.domain}:${
-			location.port
-		}/admin/deletepost`;
-		$.ajax({
-			url: url,
-			xhrFields: {
-				withCredentials: true
-			},
-			crossDomain: true,
-			type: "DELETE",
-			headers: {
-				"Content-Type": "application/x-www-form-urlencoded",
-				"Access-Control-Allow-Origin": "*"
-			},
-			async: true,
-			data: {
-				id: idToDelete
-			},
-			// data: $(".form-horizontal").serialize(),
-			dataType: "json",
-			success: function(result) {
-				// console.log("create thanh cong");
-				if (result.result == "success") {
-					toastr.options = {
-						closeButton: false,
-						debug: false,
-						newestOnTop: true,
-						progressBar: true,
-						positionClass: "toast-top-right",
-						preventDuplicates: false,
-						showDuration: 300,
-						hideDuration: 1000,
-						timeOut: 2000,
-						extendedTimeOut: 1000,
-						showEasing: "swing",
-						hideEasing: "linear",
-						showMethod: "fadeIn",
-						hideMethod: "fadeOut"
-					};
-					toastr["success"](`${result.message}`, "Notification");
-					window.location.href = `${location.protocol}//${
-						document.domain
-					}:${location.port}/admin`;
-				} else if (result.result == "failed") {
-					// console.log(`khong create duoc`);
-					toastr.options = {
-						closeButton: false,
-						debug: false,
-						newestOnTop: true,
-						progressBar: true,
-						positionClass: "toast-top-right",
-						preventDuplicates: false,
-						showDuration: 300,
-						hideDuration: 1000,
-						timeOut: 2000,
-						extendedTimeOut: 1000,
-						showEasing: "swing",
-						hideEasing: "linear",
-						showMethod: "fadeIn",
-						hideMethod: "fadeOut"
-					};
-					toastr["error"](`${result.message}`, "Notification");
+	if (!isAjaxLoading) {
+		//sử dụng phương thức cắm cờ để check xem ajax có đang hoạt động không, false thì bắt đầu chạy ajax
+		isAjaxLoading = !isAjaxLoading;
+		$("#sosureBtn").click(e => {
+			e.preventDefault();
+			const url = `${location.protocol}//${document.domain}:${
+				location.port
+			}/admin/deletepost`;
+			$.ajax({
+				url: url,
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				type: "DELETE",
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded",
+					"Access-Control-Allow-Origin": "*"
+				},
+				async: true,
+				data: {
+					id: idToDelete
+				},
+				// data: $(".form-horizontal").serialize(),
+				dataType: "json",
+				success: function(result) {
+					// console.log("create thanh cong");
+					if (result.result == "success") {
+						toastr.options = {
+							closeButton: false,
+							debug: false,
+							newestOnTop: true,
+							progressBar: true,
+							positionClass: "toast-top-right",
+							preventDuplicates: false,
+							showDuration: 300,
+							hideDuration: 1000,
+							timeOut: 2000,
+							extendedTimeOut: 1000,
+							showEasing: "swing",
+							hideEasing: "linear",
+							showMethod: "fadeIn",
+							hideMethod: "fadeOut"
+						};
+						toastr["success"](`${result.message}`, "Notification");
+						window.location.href = `${location.protocol}//${
+							document.domain
+						}:${location.port}/admin`;
+						return;
+					} else if (result.result == "failed") {
+						// console.log(`khong create duoc`);
+						toastr.options = {
+							closeButton: false,
+							debug: false,
+							newestOnTop: true,
+							progressBar: true,
+							positionClass: "toast-top-right",
+							preventDuplicates: false,
+							showDuration: 300,
+							hideDuration: 1000,
+							timeOut: 2000,
+							extendedTimeOut: 1000,
+							showEasing: "swing",
+							hideEasing: "linear",
+							showMethod: "fadeIn",
+							hideMethod: "fadeOut"
+						};
+						toastr["error"](`${result.message}`, "Notification");
+						return;
+					}
+				},
+				complete: function(complete) {
+					isAjaxLoading = !isAjaxLoading;
 				}
-			}
+			});
 		});
-	});
+	}
+
+	return;
 });
 
 $(".admin-edit-btn").click(function(e) {
 	// console.log('admin-edit-btn');
 	$("#defaultContactFormName1").val(
-	  `${$($(this).parent())
-		.parent()
-		.find(".admin-post-title")
-		.text()
-		.trim()}`
+		`${$($(this).parent())
+			.parent()
+			.find(".admin-post-title")
+			.text()
+			.trim()}`
 	);
 	$(".category-list").val(
-	  `${$($(this).parent())
-		.parent()
-		.find(".admin-post-tags")
-		.text()
-		.trim()}`
+		`${$($(this).parent())
+			.parent()
+			.find(".admin-post-tags")
+			.text()
+			.trim()}`
 	);
 
-	$("textarea").froalaEditor('html.set',`
+	$("textarea").froalaEditor(
+		"html.set",
+		`
 	${$($(this).parent())
 		.parent()
 		.find(".admin-post-content")
 		.text()
 		.trim()}
-	`);
-  });
+	`
+	);
+});

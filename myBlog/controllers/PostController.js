@@ -73,8 +73,11 @@ export const createPost = async params => {
 		const userFinded = await User.findOne({
 			where: { email }
 		});
+		const postfinded =await Post.findOne({
+			where: { title }
+		});
 		const timepost = Date.now();
-		if (userFinded && userFinded.isactive == "true") {
+		if (userFinded && userFinded.isactive == "true" && !postfinded) {
 			const newPost = await Post.create(
 				{
 					title,
